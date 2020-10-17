@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const db = require("../database/dbConfig");
 
 const authenticate = require('../auth/authenticate-middleware.js');
 const authRouter = require('../auth/auth-router.js');
@@ -28,9 +29,10 @@ module.exports = server;
 
 async function getDbStatus() {
   try{
-    await knex.raw('select 1+1 as result');
+    await db.raw('select 1+1 as result');
     return true;
   } catch(err) {
+    console.log(err)
     return false;
   }
 }

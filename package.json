@@ -5,10 +5,20 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watchAll"
+    "test": "cross-env DB_ENV=testing jest --watchAll",
+    "test:ci": "cross-env DB_ENV=testing jest --coverage"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageDirectory": "_coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -32,6 +42,7 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "jest": "^26.5.3",
     "nodemon": "^2.0.3",
     "supertest": "^5.0.0"

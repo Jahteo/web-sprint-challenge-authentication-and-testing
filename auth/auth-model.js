@@ -6,18 +6,19 @@ module.exports = {
   findBy,
 };
 
-function findBy (filter) {
-  return db("users")
-    .where(filter)
-}
 
 async function add (user) {
   try {
     const [id] = await db("users").insert(user, "id")
     return findById(id);
   } catch (error) {
-    throw error;
+    throw new Error(`cannot create user ${user.username}`);
   }
+}
+
+function findBy (filter) {
+  return db("users")
+    .where(filter)
 }
 
 function findById(id) {
